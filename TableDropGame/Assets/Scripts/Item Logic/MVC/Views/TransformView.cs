@@ -11,10 +11,9 @@ namespace ATG.TableDrop
         private readonly TransformPresenter _presenter;
         private readonly TransformModel _model;
         
-        
         public TransformView(Transform transform, 
             TransformPresenter presenter,TransformModel model,
-            int instanceId, SignalBus bus) : base(instanceId,bus)
+            IIdentifier item, SignalBus bus) : base(item.InstanceId,bus)
         {
             _model = model;
             _presenter = presenter;
