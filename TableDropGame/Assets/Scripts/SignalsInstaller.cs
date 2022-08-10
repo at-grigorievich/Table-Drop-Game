@@ -10,6 +10,8 @@ namespace ATG.TableDrop
 
             Container.DeclareSignal<InitPositionSignal>();
             Container.DeclareSignal<InputPositionSignal>();
+
+            Container.DeclareSignal<InitTextureSignal>();
         }
     }
 }

@@ -620,6 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnerLeftCorner: {fileID: 1599453702}
   _spawnerData: {fileID: 11400000, guid: a54ae834881434d4282db1a730b9edc2, type: 2}
+  _textureParameters: {fileID: 11400000, guid: 81b5abf461c8fa64d91bd1b7a950aa1f, type: 2}
 --- !u!1 &1922036646
 GameObject:
   m_ObjectHideFlags: 0

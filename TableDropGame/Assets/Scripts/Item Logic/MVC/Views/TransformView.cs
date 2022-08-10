@@ -13,7 +13,7 @@ namespace ATG.TableDrop
         
         public TransformView(Transform transform, 
             TransformPresenter presenter,TransformModel model,
-            IIdentifier item, SignalBus bus) : base(item.InstanceId,bus)
+            IIdentifier item, SignalBus bus) : base(item,bus)
         {
             _model = model;
             _presenter = presenter;
@@ -26,11 +26,9 @@ namespace ATG.TableDrop
         {
             SignalBus.Subscribe<InitPositionSignal>(p =>
             {
-                if (p.Id == InstanceId)
-                {
-                    _transform.SetParent(p.Parent);
-                    _presenter.OnTransformInstance(p.Position);
-                }
+                if (p.Id != InstanceId) return;
+                _transform.SetParent(p.Parent);
+                _presenter.OnTransformInstance(p.Position);
             });
             
         }
@@ -45,7 +43,8 @@ namespace ATG.TableDrop
         private void SetupPositionObserve() =>
             _model.Position
                 .ObserveEveryValueChanged(pos => pos.Value)
-                .Subscribe(pos => _transform.position = pos);
+                .Subscribe(pos => _transform.position = pos)
+                .AddTo(_disposable);
          
         #endregion
     }

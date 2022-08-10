@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace ATG.TableDrop
 {
@@ -62,6 +63,7 @@ namespace ATG.TableDrop
     {
         [SerializeField] private Transform _spawnerLeftCorner;
         [SerializeField] private SpawnerParameters _spawnerData;
+        [SerializeField] private TextureParameters _textureParameters;
 
         private Grid _grid;
 
@@ -77,20 +79,22 @@ namespace ATG.TableDrop
         {
             Transform parent = new GameObject("Items Container").transform;
             
-            int cellPerInsatance = _spawnerData.CountPerPrefab;
+            int cellPerInstance = _spawnerData.CountPerPrefab;
             
             foreach (var prefab in _spawnerData.ItemPrefabs)
             {
-                for (var j = 0; j < cellPerInsatance; j++)
+                for (var j = 0; j < cellPerInstance; j++)
                 {
                     Vector3 selectedCell = _grid.GenerateCells.Dequeue();
                     var instance = factory.Create(prefab);
 
                     bus.TryFire(new InitPositionSignal(
                         instance.InstanceId,parent,selectedCell));
+                    
+                    _textureParameters.DoLoadTexture(t => 
+                        bus.TryFire(new InitTextureSignal(instance.InstanceId, t)));
                 }
             }
         }
-        
     }
 }

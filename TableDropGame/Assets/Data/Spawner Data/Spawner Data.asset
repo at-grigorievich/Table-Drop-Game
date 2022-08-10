@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec15fdbd9a04f55b21d5cad1ee6ca3e, type: 3}
   m_Name: Spawner Data
   m_EditorClassIdentifier: 
-  _countPerPrefab: 10
+  _totalInstanceCount: 10
   _itemViewsPrefabs:
   - {fileID: 6637923732628785655, guid: f4f98c72e6c7db94293b726e0cb757e7, type: 3}
+  - {fileID: 2474146802501339732, guid: 256b3422b6764174f9d4d1a5997705e8, type: 3}
   _gridParameters: {fileID: 11400000, guid: e9fc7983545681f449e53ecb10d38825, type: 2}

@@ -1,16 +1,20 @@
-﻿using Zenject;
+﻿using UniRx;
+using Zenject;
 
 namespace ATG.TableDrop
 {
     public abstract class SignalView: IInitializable
     {
+        protected readonly CompositeDisposable _disposable 
+            = new CompositeDisposable();
+        
         protected readonly SignalBus SignalBus;
         
         protected readonly int InstanceId;
         
-        public SignalView(int instanceId, SignalBus signalBus)
+        public SignalView(IIdentifier identifier, SignalBus signalBus)
         {
-            InstanceId = instanceId;
+            InstanceId = identifier.InstanceId;
             SignalBus = signalBus;
             
             SetupSignals();

@@ -6,10 +6,12 @@ namespace ATG.TableDrop
     [CreateAssetMenu(fileName = "Spawner Data", menuName = "Spawner/New Spawner Values", order = 0)]
     public sealed class SpawnerParameters : ScriptableObject
     {
-        [SerializeField] private int _countPerPrefab;
-        [SerializeField] private ItemObject[] _itemViewsPrefabs;
-        [SerializeField] private GridParameters _gridParameters;
+        [SerializeField] private int _totalInstanceCount;
         
+        [SerializeField] private ItemObject[] _itemViewsPrefabs;
+        
+        [SerializeField] private GridParameters _gridParameters;
+
         private HashSet<ItemObject> _items;
 
         public HashSet<ItemObject> ItemPrefabs 
@@ -23,7 +25,7 @@ namespace ATG.TableDrop
 
         public GridParameters GridValue => _gridParameters;
         
-        public int CountPerPrefab => _countPerPrefab;
-        public int TotalCount => _countPerPrefab*ItemPrefabs.Count;
+        public int CountPerPrefab => TotalCount/ItemPrefabs.Count;
+        public int TotalCount => _totalInstanceCount;
     }
 }
