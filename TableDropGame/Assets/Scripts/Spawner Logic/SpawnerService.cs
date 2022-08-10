@@ -66,14 +66,14 @@ namespace ATG.TableDrop
         private Grid _grid;
 
         [Inject]
-        private void Constructor(ItemView.Factory factory)
+        private void Constructor(ItemObject.Factory factory, SignalBus bus)
         {
             _grid = new Grid(_spawnerLeftCorner.position, 
                 _spawnerData.GridValue, _spawnerData.TotalCount);
-            InstantiateView(factory);
+            InstantiateView(factory,bus);
         }
 
-        private void InstantiateView(ItemView.Factory factory)
+        private void InstantiateView(ItemObject.Factory factory, SignalBus bus)
         {
             Transform parent = new GameObject("Items Container").transform;
             
@@ -84,9 +84,10 @@ namespace ATG.TableDrop
                 for (var j = 0; j < cellPerInsatance; j++)
                 {
                     Vector3 selectedCell = _grid.GenerateCells.Dequeue();
-                    ITransformView instance = factory.Create(prefab);
+                    var instance = factory.Create(prefab);
 
-                    instance.OnInstantiate(selectedCell,parent);
+                    bus.TryFire(new InitPositionSignal(
+                        instance.InstanceId,parent,selectedCell));
                 }
             }
         }

@@ -7,16 +7,16 @@ namespace ATG.TableDrop
     public sealed class SpawnerParameters : ScriptableObject
     {
         [SerializeField] private int _countPerPrefab;
-        [SerializeField] private ItemView[] _itemViewsPrefabs;
+        [SerializeField] private ItemObject[] _itemViewsPrefabs;
         [SerializeField] private GridParameters _gridParameters;
         
-        private HashSet<ItemView> _items;
+        private HashSet<ItemObject> _items;
 
-        public HashSet<ItemView> ItemPrefabs 
+        public HashSet<ItemObject> ItemPrefabs 
         {
             get
             {
-                _items ??= new HashSet<ItemView>(_itemViewsPrefabs);
+                _items ??= new HashSet<ItemObject>(_itemViewsPrefabs);
                 return _items;
             }
         }
