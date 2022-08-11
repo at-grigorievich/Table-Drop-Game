@@ -1,5 +1,6 @@
 ﻿using UniRx;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -16,6 +17,8 @@ namespace ATG.TableDrop
         
         private ReactiveProperty<IIdentifier> _selectedIdentifier;
 
+        private bool _pointerOverUI;
+        
         public InputService(Camera camera,PlayerInput input, SignalBus bus)
         {
             _input = input;
@@ -44,6 +47,8 @@ namespace ATG.TableDrop
             Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
+                    _pointerOverUI = EventSystem.current.IsPointerOverGameObject();
+                    
                     if (_selectedIdentifier.Value == null) return;
                     
                     Vector2 input = _input.Player.Move.ReadValue<Vector2>();
@@ -57,13 +62,18 @@ namespace ATG.TableDrop
             RaycastHit hit;
             Ray ray = _camera.ScreenPointToRay(
                 _input.Player.Cursor.ReadValue<Vector2>());
-
-            IIdentifier selected = null;
             
+            //if(_input.)
+            if (_pointerOverUI) return;
+
+            
+            IIdentifier selected = null;
+
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 hit.transform.TryGetComponent(out selected);
             }
+
             _selectedIdentifier.Value = selected;
         }
         
