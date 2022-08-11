@@ -23,7 +23,7 @@ namespace ATG.TableDrop
         {
             float startHeight = instancePosition.y;
             float endHeight = startHeight + _data.JumpHeight;
-
+            
             SelectAnimation = transform =>
                 transform.DOMoveY(endHeight, _data.JumpDuration)
                     .OnUpdate(() => UpdateHeight(transform.position.y));

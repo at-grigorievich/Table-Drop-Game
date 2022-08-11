@@ -58,17 +58,13 @@ namespace ATG.TableDrop
             Ray ray = _camera.ScreenPointToRay(
                 _input.Player.Cursor.ReadValue<Vector2>());
 
+            IIdentifier selected = null;
+            
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                IIdentifier selected = null;
-
-                if (hit.transform.TryGetComponent(out ItemCollider collider))
-                {
-                    selected = collider.Identifier;
-                }
-
-                _selectedIdentifier.Value = selected;
+                hit.transform.TryGetComponent(out selected);
             }
+            _selectedIdentifier.Value = selected;
         }
         
     }

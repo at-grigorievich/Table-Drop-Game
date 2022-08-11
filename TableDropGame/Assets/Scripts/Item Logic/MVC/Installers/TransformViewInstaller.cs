@@ -6,12 +6,12 @@ namespace ATG.TableDrop
 {
     public sealed class TransformViewInstaller: MonoInstaller
     {
-        [SerializeField] private Transform _transform;
+        [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private ItemTransformData _transformData;
         
         public override void InstallBindings()
         {
-            Container.BindInstance(_transform).AsSingle();
+            Container.BindInstance(_rigidbody).AsSingle();
             Container.BindInstance(_transformData).AsSingle();
             
             Container.Bind<TransformModel>().AsSingle();

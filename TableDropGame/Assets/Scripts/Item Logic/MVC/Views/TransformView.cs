@@ -7,6 +7,7 @@ namespace ATG.TableDrop
 {
     public class TransformView: SignalView
     {
+        private readonly Rigidbody _rb;
         private readonly Transform _transform;
 
         private readonly TransformPresenter _presenter;
@@ -14,17 +15,17 @@ namespace ATG.TableDrop
 
         private Tween _currentTween;
 
-        public TransformView(Transform transform, 
+        public TransformView(Rigidbody rb, 
             TransformPresenter presenter,TransformModel model,
             IIdentifier item, SignalBus bus) : base(item,bus)
         {
             _model = model;
             _presenter = presenter;
-            
-            _transform = transform;
-            
+
+            _rb = rb;
+            _transform = _rb.transform;
         }
-        
+
         protected override void SetupSignals()
         {
             SignalBus.Subscribe<InitPositionSignal>(p =>
@@ -32,12 +33,24 @@ namespace ATG.TableDrop
                 if (p.Id != InstanceId) return;
                 _transform.SetParent(p.Parent);
                 _presenter.OnTransformInstance(p.Position);
+
+                Observable.EveryUpdate()
+                    .Subscribe(e => _model.Position.Value = _transform.position)
+                    .AddTo(_disposable);
             });
             
             SignalBus.Subscribe<SelectSignal>(s =>
             {
-                if (s.SelectedId == InstanceId) _presenter.OnSelect();
-                else _presenter.OnDeselect();
+                if (s.SelectedId == InstanceId)
+                {
+                    _presenter.OnSelect();
+                    _rb.isKinematic = true;
+                }
+                else
+                {
+                    _rb.isKinematic = false;
+                    _presenter.OnDeselect();
+                }
             });
             
             SignalBus.Subscribe<MoveSignal>(m =>
@@ -48,7 +61,6 @@ namespace ATG.TableDrop
                 }
             });
         }
-
         protected override void SetupObserves()
         {
             SetupPositionObserve();
