@@ -27,14 +27,11 @@ namespace ATG.TableDrop
 
         protected override void SetupSignals()
         {
-            SignalBus.Subscribe<InitTextureSignal>(t =>
-            {
+            SignalBus.Subscribe<InitTextureSignal>(t => {
                 if(t.Id != InstanceId) return;
                 _presenter.OnSetupTexture(t.Texture);
             });
-            
-            SignalBus.Subscribe<SelectSignal>(s =>
-            {
+            SignalBus.Subscribe<SelectSignal>(s => {
                 if (s.SelectedId == InstanceId) _presenter.OnSelect();
                 else _presenter.OnDeselect();
             });
@@ -55,8 +52,7 @@ namespace ATG.TableDrop
         private void SetupColorObserve() =>
             _model.Color
                 .ObserveEveryValueChanged(c => c.Value)
-                .Subscribe(color =>
-                {
+                .Subscribe(color => {
                     _tween?.Kill();
                     _tween = _renderer.material.DOColor(color, _presenter.AnimateColorDuration);
                     _tween.Play();

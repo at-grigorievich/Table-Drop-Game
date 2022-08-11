@@ -28,14 +28,12 @@ namespace ATG.TableDrop
 
         protected override void SetupSignals()
         {
-            SignalBus.Subscribe<InitPositionSignal>(p =>
-            {
+            SignalBus.Subscribe<InitPositionSignal>(p => {
                 if (p.Id != InstanceId) return;
                 _transform.SetParent(p.Parent);
                 _presenter.OnTransformInstance(p.Position);
             });
-            SignalBus.Subscribe<SelectSignal>(s =>
-            {
+            SignalBus.Subscribe<SelectSignal>(s => {
                 if (s.SelectedId == InstanceId)
                 {
                     _presenter.OnSelect();
@@ -49,8 +47,7 @@ namespace ATG.TableDrop
                     _presenter.OnDeselect();
                 }
             });
-            SignalBus.Subscribe<MoveSignal>(m =>
-            {
+            SignalBus.Subscribe<MoveSignal>(m => {
                 if (m.Id == InstanceId) 
                     _presenter.OnMove(m.MoveDirection);
             });
@@ -79,8 +76,7 @@ namespace ATG.TableDrop
         private void SetupSelectObserve() =>
             _model.Selection
                 .ObserveEveryValueChanged(s => s.Value)
-                .Subscribe(t =>
-                {
+                .Subscribe(t => {
                     _currentTween?.Kill();
 
                     _currentTween = t switch

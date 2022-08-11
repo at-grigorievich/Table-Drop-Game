@@ -1,16 +1,21 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ATG.TableDrop
 {
     [RequireComponent(typeof(Button))]
     public class ButtonElement : MonoBehaviour
     {
-        public Button Button { get; private set; }
+        [Inject] private SignalBus _signalBus;
+        
         private GameObject _gameObject;
-
         private int selectedInstance;
+        
+        public Button Button { get; private set; }
+
+        private bool _isAvailable = true;
         
         private void Awake()
         {
@@ -18,6 +23,8 @@ namespace ATG.TableDrop
             _gameObject = gameObject;
             
             SetActive(selectedInstance,false);
+            
+            _signalBus.Subscribe<BoolSignal>(b => _isAvailable = b.Value);
         }
 
 
@@ -30,11 +37,17 @@ namespace ATG.TableDrop
                 selectedInstance = instanceId;
 
                 Button.onClick.RemoveAllListeners();
-                Button.onClick.AddListener(() => onClick?.Invoke());
+                Button.onClick.AddListener(() => {
+                    if (!_isAvailable) return;
+                    
+                    onClick?.Invoke();
+                    onClick?.Invoke();
+                });
             }
             else if (selectedInstance == instanceId)
             {
                 _gameObject.SetActive(active);
+                _isAvailable = true;
             }
         }
     }

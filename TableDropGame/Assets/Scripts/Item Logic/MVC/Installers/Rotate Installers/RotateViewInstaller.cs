@@ -13,14 +13,20 @@ namespace ATG.TableDrop
         
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<T>()
+               .FromSubContainerResolveAll()
+                .ByMethod(InstallFacade)
+                .AsSingle().NonLazy();
+        }
+
+        void InstallFacade(DiContainer subContainer)
+        {
             RotateModel rm = new RotateModel();
-            Container.BindInstance(_rotateTransform).AsSingle();
-            Container.Bind<RotateModel>().FromInstance(rm).AsSingle();
-            Container.
-                Bind<RotatePresenter>().FromInstance(new RotatePresenter(rm,_data,_direction)).
-                AsSingle();
-            
-            Container.BindInterfacesAndSelfTo<T>().AsSingle().NonLazy();
+            subContainer.Bind<Transform>().FromInstance(_rotateTransform).AsSingle();
+            subContainer.Bind<RotateModel>().To<RotateModel>().FromInstance(rm).AsSingle();
+            subContainer.Bind<RotatePresenter>().FromInstance(new RotatePresenter(rm,_data,_direction)).AsSingle();
+
+            subContainer.BindInterfacesAndSelfTo<T>().AsSingle().NonLazy();
         }
     }
 }

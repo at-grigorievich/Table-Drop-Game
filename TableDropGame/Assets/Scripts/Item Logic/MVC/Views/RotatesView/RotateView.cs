@@ -29,7 +29,6 @@ namespace ATG.TableDrop
             _presenter = presenter;
 
             _angle = angle;
-            
         }
 
         protected override void SetupSignals()
@@ -37,7 +36,6 @@ namespace ATG.TableDrop
             SignalBus.Subscribe<SelectSignal>(s =>
                     _buttonElement.SetActive(InstanceId,  s.SelectedId == InstanceId, OnClick));
         }
-
         protected override void SetupObserves()
         {
             SetupRotateObserve();
@@ -45,24 +43,25 @@ namespace ATG.TableDrop
 
         private void SetupRotateObserve() => _model.NextAngle
             .ObserveEveryValueChanged(a => a.Value)
-            .Subscribe(nextAngle =>
-            {
-                _rotateAnimation?.Kill();
+            .Subscribe(nextAngle => {
+                if(nextAngle == 0)
+                    return;
                 
-                Vector3 to = _presenter.Direction * nextAngle;
+                _rotateAnimation?.Kill();
+                var to = _presenter.Direction * _angle + _transform.eulerAngles;
 
                 _rotateAnimation =
-                    _transform.DORotate(to, _presenter.RotateDuration);
+                    _transform.DORotateQuaternion(Quaternion.Euler(to), _presenter.RotateDuration)
+                        .OnComplete(() => SignalBus.TryFire(new BoolSignal(true)));
 
-            }).AddTo(_disposable);
+            })
+            .AddTo(_disposable);
 
         
         private void OnClick()
         {
-            if(!_rotateAnimation.IsActive())
-            {
-                _presenter.DoRotate(_angle);
-            }
+            SignalBus.TryFire(new BoolSignal(false));
+            _presenter.DoRotate(_angle);
         }
     }
 }

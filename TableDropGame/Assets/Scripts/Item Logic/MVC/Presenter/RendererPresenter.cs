@@ -16,8 +16,7 @@ namespace ATG.TableDrop
             _data = data;
         }
 
-        public void OnSetupTexture(Texture2D texture) 
-            => _model.Texture.Value = texture;
+        public void OnSetupTexture(Texture2D texture) => _model.Texture.Value = texture;
 
         public void OnSelect() => _model.Color.Value = _data.SelectColor;
         public void OnDeselect() => _model.Color.Value = _data.UnselectColor;

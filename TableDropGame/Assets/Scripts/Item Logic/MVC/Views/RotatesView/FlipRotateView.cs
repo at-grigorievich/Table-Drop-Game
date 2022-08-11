@@ -5,7 +5,7 @@ namespace ATG.TableDrop
 {
     public class FlipRotateView: RotateView
     {
-        private const float FlipRotateAngle = 180f;
+        private const float FlipRotateAngle = 180.01f;
         
         protected sealed override ButtonElement _buttonElement { get; set; }
         

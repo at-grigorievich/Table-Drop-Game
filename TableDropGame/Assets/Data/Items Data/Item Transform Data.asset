@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Item Transform Data
   m_EditorClassIdentifier: 
   <MoveSpeed>k__BackingField: 24
-  <RotateSpeed>k__BackingField: 6
+  <RotateSpeed>k__BackingField: 4
   <JumpHeight>k__BackingField: 1
   <JumpDuration>k__BackingField: 0.5

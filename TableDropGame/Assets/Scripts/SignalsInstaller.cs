@@ -15,6 +15,8 @@ namespace ATG.TableDrop
 
             Container.DeclareSignal<SelectSignal>();
             Container.DeclareSignal<MoveSignal>();
+
+            Container.DeclareSignal<BoolSignal>();
         }
     }
 }

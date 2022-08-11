@@ -31,6 +31,8 @@ Transform:
   m_Children:
   - {fileID: 4194155365163378307}
   - {fileID: 1705174199914726038}
+  - {fileID: 2600008138809304137}
+  - {fileID: 8593945273940790523}
   m_Father: {fileID: 2474146802501339733}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,6 +118,8 @@ MonoBehaviour:
   - {fileID: 4516498004756628750}
   - {fileID: 8338852710080503673}
   - {fileID: 653296110902395052}
+  - {fileID: 5014720915242824540}
+  - {fileID: 7145372301919223041}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -131,6 +135,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6fafea2d854a388767b1d90241e010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4661619349020875157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8593945273940790523}
+  - component: {fileID: 7145372301919223041}
+  m_Layer: 6
+  m_Name: Rotate Component Installer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8593945273940790523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4661619349020875157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2406973379758413156}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7145372301919223041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4661619349020875157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04cc7a6440b4c6aad1b9ecf9ed4b181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 86fef60f9d141d7479c3515d596f4a5c, type: 2}
+  _rotateTransform: {fileID: 8115855778935061359}
+  _direction: {x: 0, y: -1, z: 0}
 --- !u!1 &4999202321648747637
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +228,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 3530357284468081959}
   _transformData: {fileID: 11400000, guid: 86fef60f9d141d7479c3515d596f4a5c, type: 2}
+--- !u!1 &6065215194636204911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2600008138809304137}
+  - component: {fileID: 5014720915242824540}
+  m_Layer: 6
+  m_Name: Flip Component Installer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2600008138809304137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065215194636204911}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2406973379758413156}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5014720915242824540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065215194636204911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffcb0188872b4e79b1052b3b65918eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 86fef60f9d141d7479c3515d596f4a5c, type: 2}
+  _rotateTransform: {fileID: 2474146802501339733}
+  _direction: {x: 0, y: 0, z: 1}
 --- !u!1 &7956924211903505762
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8115855778935061358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0.065, y: -0.046, z: 0}
   m_LocalScale: {x: 4, y: 0.1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []

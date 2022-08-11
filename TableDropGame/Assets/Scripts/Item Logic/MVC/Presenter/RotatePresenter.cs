@@ -20,17 +20,6 @@ namespace ATG.TableDrop
             Direction = direction.normalized;
         }
 
-        public void DoRotate(float baseAngle)
-        {
-            float nextAngle = _model.NextAngle.Value + baseAngle;
-
-            if (nextAngle > 360)
-            {
-                _model.NextAngle.Value = 0f;
-                return;
-            }
-
-            _model.NextAngle.Value += baseAngle;
-        }
+        public void DoRotate(float baseAngle) => _model.NextAngle.Value += baseAngle;
     }
 }
