@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4643925937499066455}
   - component: {fileID: 7778179433591291957}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer Component Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 6637923732624753519}
+  _rendererData: {fileID: 11400000, guid: 25aed8814ae06d841b46501802de30a8, type: 2}
 --- !u!1 &4263773163178231766
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4935919949897475360}
   - component: {fileID: 1005082564427078874}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Move Component Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 6637923732628785654}
+  _transformData: {fileID: 11400000, guid: 86fef60f9d141d7479c3515d596f4a5c, type: 2}
 --- !u!1 &6637923732624753521
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +104,8 @@ GameObject:
   - component: {fileID: 6637923732624753516}
   - component: {fileID: 6637923732624753519}
   - component: {fileID: 6637923732624753518}
-  m_Layer: 0
+  - component: {fileID: 146072163126184414}
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,6 +190,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &146072163126184414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637923732624753521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537c173baf46f0344b5e81d24873b3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _item: {fileID: 6637923732628785655}
 --- !u!1 &6637923732628785657
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +214,7 @@ GameObject:
   - component: {fileID: 6637923732628785654}
   - component: {fileID: 1260175039619565732}
   - component: {fileID: 6637923732628785655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6857859179880240839}
   - component: {fileID: 4676592518601377453}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Installers
   m_TagString: Untagged
   m_Icon: {fileID: 0}

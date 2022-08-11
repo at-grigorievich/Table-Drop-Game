@@ -3,6 +3,13 @@ using Zenject;
 
 namespace ATG.TableDrop
 {
+    public enum SelectionType
+    {
+        None,
+        Select,
+        Unselect
+    }
+    
     public abstract class SignalView: IInitializable
     {
         protected readonly CompositeDisposable _disposable 
