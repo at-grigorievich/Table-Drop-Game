@@ -33,17 +33,14 @@ namespace ATG.TableDrop
                 if (p.Id != InstanceId) return;
                 _transform.SetParent(p.Parent);
                 _presenter.OnTransformInstance(p.Position);
-
-                Observable.EveryUpdate()
-                    .Subscribe(e => _model.Position.Value = _transform.position)
-                    .AddTo(_disposable);
             });
-            
             SignalBus.Subscribe<SelectSignal>(s =>
             {
                 if (s.SelectedId == InstanceId)
                 {
                     _presenter.OnSelect();
+                    
+                    _rb.transform.rotation = Quaternion.identity;
                     _rb.isKinematic = true;
                 }
                 else
@@ -52,29 +49,33 @@ namespace ATG.TableDrop
                     _presenter.OnDeselect();
                 }
             });
-            
             SignalBus.Subscribe<MoveSignal>(m =>
             {
-                if (m.Id == InstanceId)
-                {
+                if (m.Id == InstanceId) 
                     _presenter.OnMove(m.MoveDirection);
-                }
             });
         }
         protected override void SetupObserves()
         {
-            SetupPositionObserve();
+            SetupInitPositionObserve();
             SetupSelectObserve();
+            SetupRigidbodyMoveObserve();
         }
         
         #region Observes
          
-        private void SetupPositionObserve() =>
+        private void SetupInitPositionObserve() =>
             _model.Position
                 .ObserveEveryValueChanged(pos => pos.Value)
                 .Subscribe(pos => _transform.position = pos)
                 .AddTo(_disposable);
 
+        private void SetupRigidbodyMoveObserve() =>
+            _model.Direction
+                .ObserveEveryValueChanged(pos => pos.Value)
+                .Subscribe(dir => _rb.MovePosition(_transform.position + dir))
+                .AddTo(_disposable);
+        
         private void SetupSelectObserve() =>
             _model.Selection
                 .ObserveEveryValueChanged(s => s.Value)
@@ -82,15 +83,11 @@ namespace ATG.TableDrop
                 {
                     _currentTween?.Kill();
 
-                    switch (t)
+                    _currentTween = t switch
                     {
-                        case SelectionType.Select:
-                            _currentTween = _presenter.SelectAnimation(_transform);
-                            break;
-                        case SelectionType.Unselect:
-                            _currentTween = _presenter.UnselectAnimation(_transform);
-                            break;
-                    }
+                        SelectionType.Select => _presenter.SelectAnimation(_transform),
+                        _ => _currentTween
+                    };
 
                     _currentTween.Play();
                 })

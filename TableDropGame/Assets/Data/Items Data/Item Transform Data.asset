@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803efa9019d14b47ba4cd21bdc52f419, type: 3}
   m_Name: Item Transform Data
   m_EditorClassIdentifier: 
-  <MoveSpeed>k__BackingField: 5
+  <MoveSpeed>k__BackingField: 24
   <JumpHeight>k__BackingField: 1
   <JumpDuration>k__BackingField: 0.5

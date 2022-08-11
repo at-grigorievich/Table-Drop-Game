@@ -45,6 +45,7 @@ namespace ATG.TableDrop
             SetupColorObserve();
         }
 
+        #region Observes
         private void SetupTextureObserve() =>
             _model.Texture
                 .ObserveEveryValueChanged(t => t.Value)
@@ -61,6 +62,6 @@ namespace ATG.TableDrop
                     _tween.Play();
                 })
                 .AddTo(_disposable);
-
+        #endregion
     }
 }
