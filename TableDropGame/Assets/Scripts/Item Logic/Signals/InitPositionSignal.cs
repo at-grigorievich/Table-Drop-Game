@@ -6,7 +6,7 @@ namespace ATG.TableDrop
     {
         public readonly int Id;
 
-        public Transform Parent;
+        public readonly Transform Parent;
         
         public readonly Vector3 Position;
 

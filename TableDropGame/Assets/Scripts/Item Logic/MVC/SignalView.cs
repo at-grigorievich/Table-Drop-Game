@@ -1,20 +1,11 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using Zenject;
 
 namespace ATG.TableDrop
 {
-    public enum SelectionType
-    {
-        None,
-        Select,
-        Unselect
-    }
-    
     public abstract class SignalView: IInitializable
     {
-        protected readonly CompositeDisposable _disposable 
-            = new CompositeDisposable();
-        
         protected readonly SignalBus SignalBus;
         
         protected readonly int InstanceId;

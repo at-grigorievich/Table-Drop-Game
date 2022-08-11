@@ -11,8 +11,6 @@ namespace ATG.TableDrop
         
         [field: Range(0,1f)]
         [field: SerializeField] public float FaultValue { get; private set; }
-        //[field: Space(10)]
-        //[field: SerializeField] public byte WidthCellOffset { get; private set; }
-        //[field: SerializeField] public byte HeightCellOffset { get; private set; }
+
     }
 }

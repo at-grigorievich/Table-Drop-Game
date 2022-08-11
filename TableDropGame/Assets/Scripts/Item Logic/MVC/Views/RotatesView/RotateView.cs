@@ -55,7 +55,7 @@ namespace ATG.TableDrop
                         .OnComplete(() => SignalBus.TryFire(new BoolSignal(true)));
 
             })
-            .AddTo(_disposable);
+            .AddTo(_transform);
 
         
         private void OnClick()

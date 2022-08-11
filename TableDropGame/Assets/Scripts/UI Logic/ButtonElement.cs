@@ -11,11 +11,11 @@ namespace ATG.TableDrop
         [Inject] private SignalBus _signalBus;
         
         private GameObject _gameObject;
+       
         private int selectedInstance;
+        private bool _isAvailable = true;
         
         public Button Button { get; private set; }
-
-        private bool _isAvailable = true;
         
         private void Awake()
         {
@@ -26,9 +26,7 @@ namespace ATG.TableDrop
             
             _signalBus.Subscribe<BoolSignal>(b => _isAvailable = b.Value);
         }
-
-
-
+        
         public void SetActive(int instanceId, bool active, Action onClick = null)
         {
             if (active)

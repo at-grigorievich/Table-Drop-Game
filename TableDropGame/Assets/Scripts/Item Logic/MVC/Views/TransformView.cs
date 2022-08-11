@@ -5,6 +5,13 @@ using Zenject;
 
 namespace ATG.TableDrop
 {
+    public enum SelectionType
+    {
+        None,
+        Select,
+        Unselect
+    }
+    
     public class TransformView: SignalView
     {
         private readonly Rigidbody _rb;
@@ -65,13 +72,13 @@ namespace ATG.TableDrop
             _model.Position
                 .ObserveEveryValueChanged(pos => pos.Value)
                 .Subscribe(pos => _transform.position = pos)
-                .AddTo(_disposable);
+                .AddTo(_transform);
 
         private void SetupRigidbodyMoveObserve() =>
             _model.Direction
                 .ObserveEveryValueChanged(pos => pos.Value)
                 .Subscribe(dir => _rb.MovePosition(_transform.position + dir))
-                .AddTo(_disposable);
+                .AddTo(_transform);
         
         private void SetupSelectObserve() =>
             _model.Selection
@@ -87,7 +94,7 @@ namespace ATG.TableDrop
 
                     _currentTween.Play();
                 })
-                .AddTo(_disposable);
+                .AddTo(_transform);
 
         #endregion
     }

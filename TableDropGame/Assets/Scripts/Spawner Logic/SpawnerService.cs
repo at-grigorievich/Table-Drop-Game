@@ -50,9 +50,9 @@ namespace ATG.TableDrop
 
             while (GenerateCells.Count < needCellCount)
             {
-                int rnd = Random.Range(0, arrCount);
-
-                Vector3 selected = _gridCells[rnd];
+                var rnd = Random.Range(0, arrCount);
+                var selected = _gridCells[rnd];
+                
                 if(!GenerateCells.Contains(selected))
                     GenerateCells.Enqueue(selected);
             }
@@ -72,10 +72,11 @@ namespace ATG.TableDrop
         {
             _grid = new Grid(_spawnerLeftCorner.position, 
                 _spawnerData.GridValue, _spawnerData.TotalCount);
-            InstantiateView(factory,bus);
+            
+            InstantiateViews(factory,bus);
         }
 
-        private void InstantiateView(ItemObject.Factory factory, SignalBus bus)
+        private void InstantiateViews(ItemObject.Factory factory, SignalBus bus)
         {
             Transform parent = new GameObject("Items Container").transform;
             
@@ -86,6 +87,7 @@ namespace ATG.TableDrop
                 for (var j = 0; j < cellPerInstance; j++)
                 {
                     Vector3 selectedCell = _grid.GenerateCells.Dequeue();
+                    
                     var instance = factory.Create(prefab);
 
                     bus.TryFire(new InitPositionSignal(

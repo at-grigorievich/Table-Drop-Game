@@ -36,6 +36,7 @@ namespace ATG.TableDrop
                 else _presenter.OnDeselect();
             });
         }
+        
         protected override void SetupObserves()
         {
             SetupTextureObserve();
@@ -47,7 +48,7 @@ namespace ATG.TableDrop
             _model.Texture
                 .ObserveEveryValueChanged(t => t.Value)
                 .Subscribe(texture => _renderer.material.mainTexture = texture)
-                .AddTo(_disposable);
+                .AddTo(_renderer);
 
         private void SetupColorObserve() =>
             _model.Color
@@ -57,7 +58,7 @@ namespace ATG.TableDrop
                     _tween = _renderer.material.DOColor(color, _presenter.AnimateColorDuration);
                     _tween.Play();
                 })
-                .AddTo(_disposable);
+                .AddTo(_renderer);
         #endregion
     }
 }

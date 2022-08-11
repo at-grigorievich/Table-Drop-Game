@@ -25,7 +25,7 @@ namespace ATG.TableDrop
         private static async UniTask<Texture2D> DownloadFromLocal(string path)
         {
             var file = new FileInfo(path);
-            byte[] bytes = null;
+            byte[] bytes;
             
             if (file.Exists)
             {
@@ -36,7 +36,7 @@ namespace ATG.TableDrop
                 
                 return texture;
             }
-            else throw new NullReferenceException("Cant find path " + path);
+            throw new NullReferenceException("Cant find path " + path);
         }
         private static async UniTask<Texture2D> DownloadFromWWW(string path)
         {
@@ -45,8 +45,7 @@ namespace ATG.TableDrop
             await request.SendWebRequest();
             
             return  request.result == UnityWebRequest.Result.Success
-                ? DownloadHandlerTexture.GetContent(request)
-                : null;
+                ? DownloadHandlerTexture.GetContent(request) : null;
         }
     }
     
